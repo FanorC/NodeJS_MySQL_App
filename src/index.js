@@ -40,14 +40,14 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-//Global Variable
-app.use((req,res,next)=> {
-    
-    app.locals.success=req.flash('success');
-    app.locals.message=req.flash('message');
-    next();
-});
 
+//Global Variable
+app.use((req, res, next) => {
+    app.locals.message = req.flash('message');
+    app.locals.success = req.flash('success');
+    app.locals.user = req.user;
+    next();
+  });
 
 //Routes
 app.use(require('./routes'));
